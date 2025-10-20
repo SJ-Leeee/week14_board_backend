@@ -21,9 +21,16 @@ export class AuthService {
     const { username, email, password } = signUpDto;
 
     // 이메일 중복 체크
-    const existingUser = await this.usersService.findByEmail(email);
-    if (existingUser) {
+    const existEmail = await this.usersService.findByEmail(email);
+    if (existEmail) {
       throw new ConflictException('이미 존재하는 이메일입니다.');
+    }
+
+    // username 중복체크
+    // 실제서비스에서는 중복허용을 고려
+    const existUsername = await this.usersService.findByUsername(username);
+    if (existUsername) {
+      throw new ConflictException('이미 존재하는 닉네임입니다.');
     }
 
     // 비밀번호 해싱
