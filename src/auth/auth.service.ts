@@ -64,6 +64,8 @@ export class AuthService {
 
     // JWT 토큰 생성
     const payload = { sub: user._id, email: user.email };
+    // 기한, 시크릿키는 전역으로 설정
+    // iat, exp도 JwtService객체 내에서 설정
     const access_token = this.jwtService.sign(payload);
 
     return { access_token };
