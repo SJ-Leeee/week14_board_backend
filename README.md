@@ -83,3 +83,19 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## GIT 커밋 컨벤션
+
+### feat: 새로운 "기능" 추가
+
+### fix: "버그" 수정
+
+### docs: "문서" 수정(코드와 관련x, 주석포함)
+
+### style: 공백, 세미콜론 등 스타일 수정
+
+### refactor: 코드 리팩토링(기능 변화x)
+
+### test: 테스트관련수정
+
+### chore: 빌드, 보조(문서 생성기능, 로그 ..) 수정

@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  ConflictException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
@@ -25,7 +29,11 @@ export class AuthService {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 사용자 생성
-    const user = await this.usersService.create(username, email, hashedPassword);
+    const user = await this.usersService.create(
+      username,
+      email,
+      hashedPassword,
+    );
 
     return {
       message: '회원가입 완료',

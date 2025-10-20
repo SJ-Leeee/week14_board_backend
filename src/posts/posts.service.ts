@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Post, PostDocument } from './schemas/post.schema';
@@ -10,7 +14,10 @@ import { UserDocument } from '../users/schemas/user.schema';
 export class PostsService {
   constructor(@InjectModel(Post.name) private postModel: Model<PostDocument>) {}
 
-  async create(createPostDto: CreatePostDto, user: UserDocument): Promise<PostDocument> {
+  async create(
+    createPostDto: CreatePostDto,
+    user: UserDocument,
+  ): Promise<PostDocument> {
     const newPost = new this.postModel({
       ...createPostDto,
       author: user._id,
@@ -55,7 +62,11 @@ export class PostsService {
     return post;
   }
 
-  async update(id: string, updatePostDto: UpdatePostDto, user: UserDocument): Promise<PostDocument> {
+  async update(
+    id: string,
+    updatePostDto: UpdatePostDto,
+    user: UserDocument,
+  ): Promise<PostDocument> {
     const post = await this.postModel.findById(id).exec();
 
     if (!post) {
