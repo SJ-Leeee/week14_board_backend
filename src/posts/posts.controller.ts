@@ -23,9 +23,11 @@ export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
+  // jwt로 유저검증
   @UseGuards(JwtAuthGuard)
   async create(
     @Body() createPostDto: CreatePostDto,
+    // 가드로 넘어온 유저객체
     @GetUser() user: UserDocument,
   ) {
     return this.postsService.create(createPostDto, user);
