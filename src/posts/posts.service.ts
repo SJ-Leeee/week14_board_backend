@@ -23,6 +23,7 @@ export class PostsService {
       author: user._id,
     });
     const savedPost = await newPost.save();
+    // 포스트와 함께 유저네임과 이메일을 같이반환
     return savedPost.populate('author', 'username email');
   }
 
