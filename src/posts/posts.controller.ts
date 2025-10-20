@@ -52,7 +52,7 @@ export class PostsController {
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidMongoIdPipe) id: string,
     @Body() updatePostDto: UpdatePostDto,
     @GetUser() user: UserDocument,
   ) {
@@ -65,7 +65,10 @@ export class PostsController {
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  async remove(@Param('id') id: string, @GetUser() user: UserDocument) {
+  async remove(
+    @Param('id', ValidMongoIdPipe) id: string,
+    @GetUser() user: UserDocument,
+  ) {
     await this.postsService.remove(id, user);
     return { message: '게시글이 삭제되었습니다.' };
   }
