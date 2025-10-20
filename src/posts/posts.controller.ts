@@ -17,6 +17,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { GetUser } from '../common/decorators/get-user.decorator';
 import { UserDocument } from '../users/schemas/user.schema';
+import { ValidMongoIdPipe } from 'src/common/pipes/valid-object-id.pipe';
 
 @Controller('posts')
 export class PostsController {
@@ -42,9 +43,11 @@ export class PostsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  // ObjectId인지 검증
+  async findOne(@Param('id', ValidMongoIdPipe) id: string) {
     return this.postsService.findOne(id);
   }
+  //
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
