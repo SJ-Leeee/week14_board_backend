@@ -3,6 +3,7 @@
 /node_modules
 /build
 /nobuild
+
 # Logs
 logs
 *.log
