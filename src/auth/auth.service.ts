@@ -17,6 +17,7 @@ export class AuthService {
   ) {}
 
   async signUp(signUpDto: SignUpDto) {
+    // username, email, pw는 이미 한번 검증을 하고 들어옴
     const { username, email, password } = signUpDto;
 
     // 이메일 중복 체크

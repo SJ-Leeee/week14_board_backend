@@ -14,8 +14,9 @@ import { CommentsModule } from './comments/comments.module';
       isGlobal: true,
     }),
     MongooseModule.forRoot(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/board',
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/test',
     ),
+
     AuthModule,
     UsersModule,
     PostsModule,
