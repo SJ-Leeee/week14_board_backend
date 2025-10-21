@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import { login as loginApi } from '../../api/auth.api';
 
@@ -32,10 +33,13 @@ const LoginPage = () => {
       const response = await loginApi(formData);
       // 로그인 함수로 로그인
       login(response.access_token, response.user);
+      toast.success('로그인 성공!');
       // 문제 없으면 메인페이지로
       navigate('/');
     } catch (err) {
-      setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
+      const errorMessage = '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.';
+      setError(errorMessage);
+      toast.error(errorMessage);
       console.error(err);
     } finally {
       setLoading(false);

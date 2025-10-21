@@ -54,12 +54,16 @@ axiosInstance.interceptors.response.use(
   error => {
     // 401 에러면 토큰이 만료되었거나 유효하지 않음
     if (error.response?.status === 401) {
-      // 토큰 삭제
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('user');
+      // 로그인/회원가입 페이지에서는 리다이렉트하지 않음
+      const currentPath = window.location.pathname;
+      if (currentPath !== '/login' && currentPath !== '/signup') {
+        // 토큰 삭제
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user');
 
-      // 로그인 페이지로 리다이렉트
-      window.location.href = '/login';
+        // 로그인 페이지로 리다이렉트
+        window.location.href = '/login';
+      }
     }
 
     return Promise.reject(error);
