@@ -3,7 +3,7 @@
  */
 
 import axiosInstance from './axios';
-import { Comment, CreateCommentRequest } from '../types';
+import type { Comment, CreateCommentRequest } from '../types';
 
 /**
  * 댓글 목록 조회

@@ -35,6 +35,18 @@ const PostListPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // 날짜 포맷팅
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
   // 페이지 번호 배열 생성 (최대 5개씩 표시)
   const getPageNumbers = () => {
     const pageNumbers = [];
@@ -170,7 +182,7 @@ const PostListPage = () => {
                       </div>
                       <span className="font-medium">{post.author.username}</span>
                     </div>
-                    <span>{post.createdAt}</span>
+                    <span>{formatDate(post.createdAt)}</span>
                   </div>
                 </div>
 
