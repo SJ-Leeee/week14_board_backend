@@ -1,13 +1,21 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, Logger } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const logger = new Logger('HTTP');
 
   // CORS 설정 (프론트엔드에서 접근 가능하도록)
   app.enableCors();
+
+  // 요청 로깅
+  app.use((req, res, next) => {
+    const { method, originalUrl } = req;
+    logger.log(`📥 ${method} ${originalUrl}`);
+    next();
+  });
 
   // 전역 Validation Pipe 설정
   app.useGlobalPipes(
