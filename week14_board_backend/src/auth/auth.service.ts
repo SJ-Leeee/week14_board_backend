@@ -75,6 +75,13 @@ export class AuthService {
     // iat, exp도 JwtService객체 내에서 설정
     const access_token = this.jwtService.sign(payload);
 
-    return { access_token };
+    return {
+      access_token,
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+      },
+    };
   }
 }

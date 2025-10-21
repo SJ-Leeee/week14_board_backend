@@ -7,8 +7,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { login as loginApi } from '../../api/auth.api';
 
+// 로그인 페이지 시작
 const LoginPage = () => {
+  // 페이지를 옮길 수 있는 객체
   const navigate = useNavigate();
+  // 로그인 함수
   const { login } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -19,13 +22,17 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
+    // 페이지초기화 방지
     e.preventDefault();
     setError('');
     setLoading(true);
 
     try {
+      // 로그인 api의 반환값
       const response = await loginApi(formData);
+      // 로그인 함수로 로그인
       login(response.access_token, response.user);
+      // 문제 없으면 메인페이지로
       navigate('/');
     } catch (err) {
       setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
@@ -42,17 +49,11 @@ const LoginPage = () => {
         <div className="text-center mb-10">
           <Link to="/" className="inline-block mb-6">
             <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto shadow-lg transform hover:scale-110 transition-all duration-300">
-              <span className="text-5xl font-bold text-slate-800">
-                J
-              </span>
+              <span className="text-5xl font-bold text-slate-800">J</span>
             </div>
           </Link>
-          <h2 className="text-4xl font-extrabold text-slate-800 mb-2">
-            환영합니다!
-          </h2>
-          <p className="text-slate-600 text-lg">
-            정글 게시판에 로그인하세요
-          </p>
+          <h2 className="text-4xl font-extrabold text-slate-800 mb-2">환영합니다!</h2>
+          <p className="text-slate-600 text-lg">정글 게시판에 로그인하세요</p>
         </div>
 
         {/* 로그인 폼 */}
@@ -60,11 +61,7 @@ const LoginPage = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
               <div className="bg-red-50 border-2 border-red-200 text-red-700 px-5 py-4 rounded-2xl text-sm font-medium flex items-center">
-                <svg
-                  className="w-5 h-5 mr-3 flex-shrink-0"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
+                <svg className="w-5 h-5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -77,10 +74,7 @@ const LoginPage = () => {
 
             <div className="space-y-5">
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-bold text-gray-700 mb-2"
-                >
+                <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">
                   이메일
                 </label>
                 <input
@@ -96,10 +90,7 @@ const LoginPage = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-bold text-gray-700 mb-2"
-                >
+                <label htmlFor="password" className="block text-sm font-bold text-gray-700 mb-2">
                   비밀번호
                 </label>
                 <input
@@ -170,12 +161,7 @@ const LoginPage = () => {
             to="/"
             className="inline-flex items-center text-slate-600 hover:text-slate-800 text-sm font-medium transition-colors"
           >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
