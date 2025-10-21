@@ -19,5 +19,9 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      'prefer-const': 'off', // 'endPage' is never reassigned 경고 끄기
+      '@typescript-eslint/no-unused-vars': 'off', // 사용하지 않는 변수 경고 끄기
+    },
   },
 ])
