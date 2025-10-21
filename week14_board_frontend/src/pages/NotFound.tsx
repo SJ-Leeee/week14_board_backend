@@ -11,11 +11,11 @@ const NotFound = () => {
         {/* 404 일러스트 */}
         <div className="mb-8">
           <div className="relative">
-            <h1 className="text-9xl font-black text-white/20 select-none">404</h1>
+            <h1 className="text-9xl font-black text-slate-800/10 select-none">404</h1>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-32 h-32 bg-white rounded-3xl shadow-2xl flex items-center justify-center transform -rotate-12 hover:rotate-0 transition-transform duration-300">
+              <div className="w-32 h-32 bg-white rounded-3xl shadow-xl flex items-center justify-center transform -rotate-12 hover:rotate-0 transition-transform duration-300">
                 <svg
-                  className="w-16 h-16 text-purple-500"
+                  className="w-16 h-16 text-slate-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -45,7 +45,7 @@ const NotFound = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/"
-              className="button-hover inline-flex items-center justify-center bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl text-base font-bold shadow-lg"
+              className="button-hover inline-flex items-center justify-center bg-slate-700 text-white px-8 py-4 rounded-xl text-base font-bold shadow-md hover:bg-slate-800"
             >
               <svg
                 className="w-5 h-5 mr-2"
@@ -65,7 +65,7 @@ const NotFound = () => {
 
             <button
               onClick={() => window.history.back()}
-              className="button-hover inline-flex items-center justify-center bg-white text-gray-700 px-8 py-4 rounded-xl text-base font-bold shadow-lg border-2 border-gray-200 hover:border-purple-300"
+              className="button-hover inline-flex items-center justify-center bg-white text-slate-700 px-8 py-4 rounded-xl text-base font-bold shadow-md border-2 border-slate-200 hover:border-slate-300"
             >
               <svg
                 className="w-5 h-5 mr-2"
@@ -86,9 +86,9 @@ const NotFound = () => {
         </div>
 
         {/* 추가 도움말 */}
-        <p className="text-white/80 text-sm">
+        <p className="text-slate-600 text-sm">
           문제가 지속되면{' '}
-          <Link to="/" className="text-white font-semibold hover:underline">
+          <Link to="/" className="text-slate-800 font-semibold hover:underline">
             메인 페이지
           </Link>
           로 이동해보세요

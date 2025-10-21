@@ -41,16 +41,16 @@ const LoginPage = () => {
         {/* 로고 및 타이틀 */}
         <div className="text-center mb-10">
           <Link to="/" className="inline-block mb-6">
-            <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto shadow-2xl transform hover:scale-110 transition-all duration-300">
-              <span className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto shadow-lg transform hover:scale-110 transition-all duration-300">
+              <span className="text-5xl font-bold text-slate-800">
                 J
               </span>
             </div>
           </Link>
-          <h2 className="text-4xl font-extrabold text-white mb-2 drop-shadow-lg">
+          <h2 className="text-4xl font-extrabold text-slate-800 mb-2">
             환영합니다!
           </h2>
-          <p className="text-white/90 text-lg">
+          <p className="text-slate-600 text-lg">
             정글 게시판에 로그인하세요
           </p>
         </div>
@@ -88,7 +88,7 @@ const LoginPage = () => {
                   name="email"
                   type="email"
                   required
-                  className="appearance-none block w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="appearance-none block w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all duration-200"
                   placeholder="example@email.com"
                   value={formData.email}
                   onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -107,7 +107,7 @@ const LoginPage = () => {
                   name="password"
                   type="password"
                   required
-                  className="appearance-none block w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                  className="appearance-none block w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all duration-200"
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={e => setFormData({ ...formData, password: e.target.value })}
@@ -119,7 +119,7 @@ const LoginPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="button-hover w-full flex justify-center items-center py-4 px-4 border border-transparent text-base font-bold rounded-xl text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                className="button-hover w-full flex justify-center items-center py-4 px-4 border border-transparent text-base font-bold rounded-xl text-white bg-slate-700 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
               >
                 {loading ? (
                   <>
@@ -155,7 +155,7 @@ const LoginPage = () => {
                 계정이 없으신가요?{' '}
                 <Link
                   to="/signup"
-                  className="font-bold text-purple-600 hover:text-purple-700 transition-colors"
+                  className="font-bold text-blue-600 hover:text-blue-700 transition-colors"
                 >
                   회원가입
                 </Link>
@@ -168,7 +168,7 @@ const LoginPage = () => {
         <div className="text-center mt-6">
           <Link
             to="/"
-            className="inline-flex items-center text-white/90 hover:text-white text-sm font-medium transition-colors"
+            className="inline-flex items-center text-slate-600 hover:text-slate-800 text-sm font-medium transition-colors"
           >
             <svg
               className="w-5 h-5 mr-2"
