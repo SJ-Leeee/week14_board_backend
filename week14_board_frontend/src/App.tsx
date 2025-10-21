@@ -8,6 +8,7 @@
  */
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Layout from './components/layout/Layout';
 
@@ -32,6 +33,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <Toaster position="top-right" />
         <Routes>
           {/* 인증 페이지 (Layout 없이 전체 화면) */}
           <Route path="/login" element={<LoginPage />} />
