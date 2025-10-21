@@ -5,7 +5,8 @@
 
 /*
   전역 스타일
-  - Padlet 스타일의 깔끔한 게시판 디자인
+  - 눈의 피로를 줄이는 부드러운 색상의 현대적인 디자인
+  - 차분한 블루그레이 톤으로 장시간 사용해도 편안함
 */
 body {
   margin: 0;
@@ -14,7 +15,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
   min-height: 100vh;
 }
 
