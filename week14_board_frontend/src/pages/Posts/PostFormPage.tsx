@@ -3,17 +3,28 @@
  */
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { createPost } from '../../api/posts.api';
 
 const PostFormPage = () => {
   const [formData, setFormData] = useState({
     title: '',
     content: '',
   });
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // API 호출 로직은 나중에 구현
-    console.log('게시글 작성:', formData);
+
+    try {
+      await createPost(formData);
+      toast.success('게시물 등록이 완료되었습니다.');
+      navigate('/');
+    } catch (err) {
+      toast.error('게시물 등록에 실패했습니다. 다시 시도해주세요.');
+      console.error(err);
+    }
   };
 
   return (
@@ -55,6 +66,7 @@ const PostFormPage = () => {
           <button
             type="button"
             className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+            onClick={() => navigate('/')}
           >
             취소
           </button>
