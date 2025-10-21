@@ -1,101 +1,146 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 정글 게시판 (Jungle Board)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+풀스택 게시판 애플리케이션으로 NestJS와 React를 사용하여 구현했습니다.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 프로젝트 구조
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ pnpm install
+```
+week14_board/
+├── week14_board_backend/   # NestJS 백엔드
+└── week14_board_frontend/  # React + Vite 프론트엔드
 ```
 
-## Compile and run the project
+## 기술 스택
+
+### Backend
+- **Framework**: NestJS 10.x
+- **Database**: MongoDB (Mongoose)
+- **Authentication**: JWT (Passport)
+- **API Documentation**: Swagger
+- **Validation**: class-validator, class-transformer
+- **Password Hashing**: bcrypt
+
+### Frontend
+- **Framework**: React 19.x
+- **Build Tool**: Vite 7.x
+- **Routing**: React Router DOM 7.x
+- **Styling**: Tailwind CSS
+- **HTTP Client**: Axios
+- **Notifications**: react-hot-toast
+- **Language**: TypeScript
+
+## 주요 기능
+
+- 사용자 인증 (회원가입, 로그인)
+- JWT 기반 인증 시스템
+- 게시글 CRUD (작성, 조회, 수정, 삭제)
+- 댓글 기능
+- 페이지네이션
+- 반응형 UI
+
+## 시작하기
+
+### 사전 요구사항
+
+- Node.js 18.x 이상
+- pnpm
+- MongoDB
+
+### 설치 및 실행
+
+#### 1. 백엔드 설정
 
 ```bash
-# development
-$ pnpm run start
+cd week14_board_backend
+pnpm install
 
-# watch mode
-$ pnpm run start:dev
+# 개발 모드 실행
+pnpm run start:dev
 
-# production mode
-$ pnpm run start:prod
+# 프로덕션 빌드
+pnpm run build
+pnpm run start:prod
 ```
 
-## Run tests
+백엔드는 기본적으로 `http://localhost:3000`에서 실행됩니다.
+
+**환경 변수 설정** (`.env` 파일 생성)
+```env
+MONGODB_URI=mongodb://localhost:27017/jungle-board
+JWT_SECRET=your-secret-key
+JWT_EXPIRATION=1d
+```
+
+#### 2. 프론트엔드 설정
 
 ```bash
-# unit tests
-$ pnpm run test
+cd week14_board_frontend
+pnpm install
 
-# e2e tests
-$ pnpm run test:e2e
+# 개발 서버 실행
+pnpm run dev
 
-# test coverage
-$ pnpm run test:cov
+# 프로덕션 빌드
+pnpm run build
+pnpm run preview
 ```
 
-## Resources
+프론트엔드는 기본적으로 `http://localhost:5173`에서 실행됩니다.
 
-Check out a few resources that may come in handy when working with NestJS:
+## API 문서
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+백엔드 서버 실행 후 Swagger 문서를 확인할 수 있습니다:
+- `http://localhost:3000/api`
 
-## Support
+## 프로젝트 구조 상세
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Backend (`week14_board_backend/src`)
+```
+src/
+├── auth/           # 인증 모듈 (회원가입, 로그인, JWT)
+├── users/          # 사용자 모듈
+├── posts/          # 게시글 모듈
+├── comments/       # 댓글 모듈
+└── main.ts         # 애플리케이션 엔트리 포인트
+```
 
-## Stay in touch
+### Frontend (`week14_board_frontend/src`)
+```
+src/
+├── api/            # API 호출 함수
+├── components/     # 재사용 가능한 컴포넌트
+├── context/        # React Context (인증 등)
+├── pages/          # 페이지 컴포넌트
+├── types/          # TypeScript 타입 정의
+└── App.tsx         # 메인 앱 컴포넌트
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 테스트
 
-## License
+### Backend
+```bash
+cd week14_board_backend
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# 단위 테스트
+pnpm run test
+
+# E2E 테스트
+pnpm run test:e2e
+
+# 테스트 커버리지
+pnpm run test:cov
+```
 
 ## GIT 커밋 컨벤션
 
-### feat: 새로운 "기능" 추가
+- `feat`: 새로운 기능 추가
+- `fix`: 버그 수정
+- `docs`: 문서 수정 (코드와 관련 없음, 주석 포함)
+- `style`: 공백, 세미콜론 등 스타일 수정
+- `refactor`: 코드 리팩토링 (기능 변화 없음)
+- `test`: 테스트 관련 수정
+- `chore`: 빌드, 보조 도구 수정
 
-### fix: "버그" 수정
+## 라이센스
 
-### docs: "문서" 수정(코드와 관련x, 주석포함)
-
-### style: 공백, 세미콜론 등 스타일 수정
-
-### refactor: 코드 리팩토링(기능 변화x)
-
-### test: 테스트관련수정
-
-### chore: 빌드, 보조(문서 생성기능, 로그 ..) 수정
+이 프로젝트는 학습 목적으로 만들어졌습니다.
