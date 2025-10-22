@@ -18,7 +18,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { GetUser } from '../common/decorators/get-user.decorator';
 import { UserDocument } from '../users/schemas/user.schema';
-import { ValidMongoIdPipe } from 'src/common/pipes/valid-object-id.pipe';
+import { ValidMongoIdPipe } from '../common/pipes/valid-object-id.pipe';
 import {
   ApiCreatePost,
   ApiUpdatePost,
