@@ -9,7 +9,6 @@ import { NotFoundException, ForbiddenException } from '@nestjs/common';
 
 describe('PostsService', () => {
   let service: PostsService;
-  let model: Model<PostDocument>;
 
   // Mock 사용자 데이터
   const mockUser = {
@@ -59,7 +58,6 @@ describe('PostsService', () => {
     }).compile();
 
     service = module.get<PostsService>(PostsService);
-    model = module.get<Model<PostDocument>>(getModelToken(Post.name));
   });
 
   afterEach(() => {
