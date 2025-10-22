@@ -7,10 +7,11 @@
  */
 
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 // axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000', // 백엔드 API 주소
+  baseURL: API_BASE_URL, // 환경변수에서 가져옴
   timeout: 10000, // 10초 타임아웃
   headers: {
     'Content-Type': 'application/json',
