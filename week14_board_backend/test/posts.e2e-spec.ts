@@ -203,7 +203,7 @@ describe('Posts (e2e)', () => {
     });
 
     it('잘못된 ID 형식으로 조회 실패', () => {
-      return request(app.getHttpServer()).get('/posts/invalid-id').expect(500); // Mongoose CastError
+      return request(app.getHttpServer()).get('/posts/invalid-id').expect(400); // Mongoose CastError
     });
   });
 
@@ -218,9 +218,9 @@ describe('Posts (e2e)', () => {
         })
         .expect(200)
         .expect((res) => {
-          expect(res.body).toHaveProperty('_id', postId);
-          expect(res.body).toHaveProperty('title', 'Updated Title');
-          expect(res.body).toHaveProperty('content', 'Updated Content');
+          expect(res.body.post).toHaveProperty('_id', postId);
+          expect(res.body.post).toHaveProperty('title', 'Updated Title');
+          expect(res.body.post).toHaveProperty('content', 'Updated Content');
         });
     });
 
