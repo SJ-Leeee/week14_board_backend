@@ -19,6 +19,7 @@ week14_board/
 - **API Documentation**: Swagger
 - **Validation**: class-validator, class-transformer
 - **Password Hashing**: bcrypt
+- **Testing**: Jest, Supertest
 
 ### Frontend
 - **Framework**: React 19.x
@@ -28,6 +29,12 @@ week14_board/
 - **HTTP Client**: Axios
 - **Notifications**: react-hot-toast
 - **Language**: TypeScript
+
+### DevOps & CI/CD
+- **CI**: GitHub Actions
+- **Backend Deployment**: AWS EC2 + PM2
+- **Frontend Deployment**: Vercel (예정)
+- **Package Manager**: pnpm
 
 ## 주요 기능
 
@@ -129,6 +136,23 @@ pnpm run test:e2e
 
 # 테스트 커버리지
 pnpm run test:cov
+
+# 모듈별 테스트
+pnpm run test:auth      # 인증 모듈 테스트
+pnpm run test:posts     # 게시글 모듈 테스트
+pnpm run test:users     # 사용자 모듈 테스트
+pnpm run test:comments  # 댓글 모듈 테스트
+```
+
+### Frontend
+```bash
+cd week14_board_frontend
+
+# 린트 검사
+pnpm run lint
+
+# 타입 체크
+pnpm run build  # TypeScript 타입 검사 포함
 ```
 
 ## GIT 커밋 컨벤션

@@ -21,16 +21,11 @@ const Header = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* 로고 */}
-          <Link
-            to="/"
-            className="flex items-center space-x-3 group"
-          >
+          <Link to="/" className="flex items-center space-x-3 group">
             <div className="w-12 h-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-2xl flex items-center justify-center shadow-md transform transition-all duration-300 group-hover:scale-110">
               <span className="text-white font-bold text-2xl">J</span>
             </div>
-            <span className="text-2xl font-bold text-slate-800">
-              정글 게시판
-            </span>
+            <span className="text-2xl font-bold text-slate-800">게시판</span>
           </Link>
 
           {/* 네비게이션 */}
