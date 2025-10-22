@@ -1,0 +1,125 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "week14_board_backend/**" # 백엔드 코드 변경 시에만 실행
+      - ".github/workflows/backend-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "week14_board_backend/**"
+      - ".github/workflows/backend-ci.yml"
+
+jobs:
+  test:
+    name: Test Backend
+    runs-on: ubuntu-latest
+
+    # MongoDB 서비스 컨테이너
+    services:
+      mongodb:
+        image: mongo:6
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    # 작업 디렉토리 설정
+    defaults:
+      run:
+        working-directory: week14_board_backend
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. pnpm 설치
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      # 3. Node.js 설정 (pnpm 캐시 포함)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "pnpm"
+          cache-dependency-path: week14_board_backend/pnpm-lock.yaml
+
+      # 4. 의존성 설치
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5. 린트 체크
+      - name: Run lint
+        run: pnpm run lint
+
+      # 6. 유닛 테스트
+      - name: Run unit tests
+        run: pnpm run test
+        env:
+          NODE_ENV: test
+
+      # 7. E2E 테스트
+      - name: Run E2E tests
+        run: pnpm run test:e2e
+        env:
+          NODE_ENV: test
+          MONGODB_URI: mongodb://localhost:27017/ci_test_board
+          JWT_SECRET: ci-test-secret-key-123456
+
+      # 8. 빌드 체크
+      - name: Build application
+        run: pnpm run build
+
+      # 9. 테스트 커버리지 업로드 (선택사항)
+      - name: Upload coverage reports
+        if: success()
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./week14_board_backend/coverage/lcov.info
+          flags: backend
+          name: backend-coverage
+        continue-on-error: true
+
+  # 린트만 별도로 실행 (빠른 피드백)
+  lint:
+    name: Lint Check
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: week14_board_backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "pnpm"
+          cache-dependency-path: week14_board_backend/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run ESLint
+        run: pnpm run lint
+
+      - name: Check formatting
+        run: pnpm run format --check
+        continue-on-error: true
