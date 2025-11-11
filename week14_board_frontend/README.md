@@ -54,7 +54,7 @@ pnpm install
 ### 2. 개발 서버 실행
 
 ```bash
-pnpm dev
+pnpm devπ
 ```
 
 브라우저에서 http://localhost:5173 으로 접속

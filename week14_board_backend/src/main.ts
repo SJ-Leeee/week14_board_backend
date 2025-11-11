@@ -1,19 +1,24 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, Logger } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { Request, Response, NextFunction } from 'express';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const logger = new Logger('HTTP');
+
+  // Winston logger 사용
+  const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
+  app.useLogger(logger);
 
   // CORS 설정 (프론트엔드에서 접근 가능하도록)
   app.enableCors();
 
   // 요청 로깅
-  app.use((req, res, next) => {
+  app.use((req: Request, _res: Response, next: NextFunction) => {
     const { method, originalUrl } = req;
-    logger.log(`📥 ${method} ${originalUrl}`);
+    logger.log(`📥 ${method} ${originalUrl}`, 'HTTP');
     next();
   });
 
@@ -48,7 +53,13 @@ async function bootstrap() {
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
-  console.log(`Application is running on: http://localhost:${port}`);
-  console.log(`Swagger documentation: http://localhost:${port}/api/docs`);
+  logger.log(
+    `Application is running on: http://localhost:${port}`,
+    'Bootstrap',
+  );
+  logger.log(
+    `Swagger documentation: http://localhost:${port}/api/docs`,
+    'Bootstrap',
+  );
 }
 bootstrap();
