@@ -10,7 +10,7 @@ receivers:
 processors:
   # 배치 처리로 성능 향상
   batch:
-    timeout: 10s
+    timeout: 5s
     send_batch_size: 1024
 
   # 리소스 속성 추가

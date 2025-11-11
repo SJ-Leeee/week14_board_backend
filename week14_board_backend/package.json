@@ -40,16 +40,13 @@
     "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
-    "fluent-logger": "^3.4.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.1",
-    "nest-winston": "^1.10.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "swagger-ui-express": "^5.0.1",
-    "winston": "^3.18.3",
     "winston-transport": "^4.9.0"
   },
   "devDependencies": {

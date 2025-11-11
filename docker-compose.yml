@@ -31,10 +31,6 @@ services:
       OTEL_SERVICE_NAME: week14-backend
       OTEL_TRACES_EXPORTER: otlp
       OTEL_LOGS_EXPORTER: none
-      # Fluent-bit Forward 설정
-      ENABLE_FLUENTBIT: "true"
-      FLUENTBIT_HOST: fluent-bit
-      FLUENTBIT_PORT: 24224
     depends_on:
       - mongodb
       - otel-collector
@@ -68,8 +64,7 @@ services:
     image: fluent/fluent-bit:2.2
     container_name: week14_fluentbit
     ports:
-      - "24224:24224"
-      - "24224:24224/udp"
+      - "2020:2020"  # Metrics/Health check
     environment:
       # 외부 Producer 서버 주소 (인프라에 배포된 서버)
       PRODUCER_HOST: ${PRODUCER_HOST:-localhost}
@@ -77,7 +72,10 @@ services:
     volumes:
       - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
       - ./fluent-bit/parsers.conf:/fluent-bit/etc/parsers.conf
+      # Docker 로그 파일 접근 (읽기 전용)
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      # Fluent-bit DB (파일 읽기 위치 추적)
+      - fluent_bit_db:/var/log
     networks:
       - week14_network
 
@@ -106,3 +104,4 @@ volumes:
   mongodb_data:
   backend_node_modules:
   frontend_node_modules:
+  fluent_bit_db:  # Fluent-bit 읽기 위치 추적 DB
