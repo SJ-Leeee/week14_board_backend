@@ -33,11 +33,13 @@ fluent-bit --version
 프로젝트에 이미 다음 설정 파일들이 있습니다:
 
 ### `fluent-bit.conf`
+
 - **INPUT**: `logs/application.log`, `logs/error.log` 모니터링
 - **FILTER**: 서비스 이름 및 환경 태그 추가
 - **OUTPUT**: `localhost:3001/api/v1/logs/batch`로 HTTP POST
 
 ### `parsers.conf`
+
 - JSON 형식의 로그 파싱
 
 ## 🚀 실행 방법
@@ -90,7 +92,7 @@ Fluent Bit이 로그 수신 서버로 전송하는 데이터 형식:
   {
     "timestamp": "2025-10-30 16:50:00",
     "level": "info",
-    "message": "📥 GET /api/posts",
+    "message": "GET /api/posts",
     "context": "HTTP",
     "service": "week14_board_backend",
     "env": "local"
@@ -254,6 +256,7 @@ tail -f fluent-bit.log
 ### 로그 전송 통계
 
 Fluent Bit 콘솔 출력에서 다음 정보를 확인할 수 있습니다:
+
 - 읽은 로그 수
 - 전송 성공/실패 횟수
 - HTTP 응답 상태 코드

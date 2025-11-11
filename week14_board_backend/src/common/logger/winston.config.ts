@@ -1,6 +1,7 @@
 import * as winston from 'winston';
 import { WinstonModuleOptions } from 'nest-winston';
 import * as path from 'path';
+import { FluentTransport } from './fluent-transport';
 
 // 로그 디렉토리 경로
 const logDir = path.join(process.cwd(), 'logs');
@@ -22,26 +23,41 @@ const consoleFormat = winston.format.combine(
   }),
 );
 
+// Transports 배열 생성
+const transports: any[] = [
+  // 콘솔 출력
+  new winston.transports.Console({
+    format: consoleFormat,
+  }),
+  // 전체 로그 파일
+  new winston.transports.File({
+    filename: path.join(logDir, 'application.log'),
+    format: logFormat,
+    maxsize: 10485760, // 10MB
+    maxFiles: 5,
+  }),
+  // 에러 로그 파일
+  new winston.transports.File({
+    filename: path.join(logDir, 'error.log'),
+    level: 'error',
+    format: logFormat,
+    maxsize: 10485760, // 10MB
+    maxFiles: 5,
+  }),
+];
+
+// Fluent-bit Transport 추가 (개발/프로덕션 환경)
+// 환경변수 ENABLE_FLUENTBIT=true 로 활성화
+if (process.env.ENABLE_FLUENTBIT === 'true') {
+  transports.push(
+    new FluentTransport({
+      tag: 'week14.backend',
+      level: 'info',
+    }),
+  );
+  console.log('✅ Fluent-bit Transport 활성화 (Forward 프로토콜)');
+}
+
 export const winstonConfig: WinstonModuleOptions = {
-  transports: [
-    // 콘솔 출력
-    new winston.transports.Console({
-      format: consoleFormat,
-    }),
-    // 전체 로그 파일
-    new winston.transports.File({
-      filename: path.join(logDir, 'application.log'),
-      format: logFormat,
-      maxsize: 10485760, // 10MB
-      maxFiles: 5,
-    }),
-    // 에러 로그 파일
-    new winston.transports.File({
-      filename: path.join(logDir, 'error.log'),
-      level: 'error',
-      format: logFormat,
-      maxsize: 10485760, // 10MB
-      maxFiles: 5,
-    }),
-  ],
+  transports,
 };

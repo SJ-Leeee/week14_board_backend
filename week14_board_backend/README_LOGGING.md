@@ -88,7 +88,7 @@ week14_board_backend/
 {
   "timestamp": "2025-10-30 16:50:00",
   "level": "info",
-  "message": "📥 GET /api/posts",
+  "message": "GET /api/posts",
   "context": "HTTP"
 }
 ```
@@ -100,7 +100,7 @@ week14_board_backend/
   {
     "timestamp": "2025-10-30 16:50:00",
     "level": "info",
-    "message": "📥 GET /api/posts",
+    "message": "GET /api/posts",
     "context": "HTTP",
     "service": "week14_board_backend",
     "env": "local"
@@ -241,6 +241,7 @@ head -n 5 logs/application.log
 ### 로그 파일 로테이션
 
 Winston이 자동으로 처리:
+
 - 최대 파일 크기: 10MB
 - 최대 파일 개수: 5개
 

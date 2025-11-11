@@ -14,8 +14,7 @@ import { winstonConfig } from './common/logger/winston.config';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      ignoreEnvFile: true,
-      // envFilePath: `.env.${process.env.NODE_ENV || 'dev'}`,
+      envFilePath: `.env.${process.env.NODE_ENV || 'dev'}`,
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],

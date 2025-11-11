@@ -1,3 +1,6 @@
+// OpenTelemetry 자동 계측 초기화 (가장 먼저 로드되어야 함)
+import './tracing';
+
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -18,7 +21,7 @@ async function bootstrap() {
   // 요청 로깅
   app.use((req: Request, _res: Response, next: NextFunction) => {
     const { method, originalUrl } = req;
-    logger.log(`📥 ${method} ${originalUrl}`, 'HTTP');
+    logger.log(`${method} ${originalUrl}`, 'HTTP');
     next();
   });
 
