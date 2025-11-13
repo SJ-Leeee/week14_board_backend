@@ -26,14 +26,9 @@ services:
       MONGODB_URI: mongodb://mongodb:27017/week14_board_dev
       JWT_SECRET: week14_team3_board
       PORT: 3000
-      # OpenTelemetry 설정
-      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
-      OTEL_SERVICE_NAME: week14-backend
-      OTEL_TRACES_EXPORTER: otlp
-      OTEL_LOGS_EXPORTER: none
     depends_on:
       - mongodb
-      - otel-collector
+
     volumes:
       - ./week14_board_backend:/app
       - backend_node_modules:/app/node_modules
@@ -58,50 +53,3 @@ services:
     command: sh -c "npm install -g pnpm && pnpm install && pnpm dev --host 0.0.0.0"
     networks:
       - week14_network
-
-  # Fluent-bit (로그 수집)
-  fluent-bit:
-    image: fluent/fluent-bit:2.2
-    container_name: week14_fluentbit
-    ports:
-      - "2020:2020"  # Metrics/Health check
-    environment:
-      # 외부 Producer 서버 주소 (인프라에 배포된 서버)
-      PRODUCER_HOST: ${PRODUCER_HOST:-localhost}
-      PRODUCER_PORT: ${PRODUCER_PORT:-8080}
-    volumes:
-      - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
-      - ./fluent-bit/parsers.conf:/fluent-bit/etc/parsers.conf
-      # Docker 로그 파일 접근 (읽기 전용)
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      # Fluent-bit DB (파일 읽기 위치 추적)
-      - fluent_bit_db:/var/log
-    networks:
-      - week14_network
-
-  # OpenTelemetry Collector (trace 수집)
-  otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.91.0
-    container_name: week14_otel_collector
-    ports:
-      - "4317:4317"   # OTLP gRPC receiver
-      - "4318:4318"   # OTLP HTTP receiver
-      - "8888:8888"   # Prometheus metrics
-      - "13133:13133" # health_check
-    environment:
-      # 외부 Producer 서버 주소 (인프라에 배포된 서버)
-      PRODUCER_OTLP_ENDPOINT: ${PRODUCER_OTLP_ENDPOINT:-http://localhost:4319}
-    volumes:
-      - ./otel-collector/otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
-    networks:
-      - week14_network
-
-networks:
-  week14_network:
-    driver: bridge
-
-volumes:
-  mongodb_data:
-  backend_node_modules:
-  frontend_node_modules:
-  fluent_bit_db:  # Fluent-bit 읽기 위치 추적 DB
